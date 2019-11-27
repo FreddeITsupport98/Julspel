@@ -48,8 +48,17 @@ funktion step(timestamp) {
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
     // ctx.clearRect(0, 0, WIDTH, HEIGHT); // rensar hela canvas, så att vi kan rita om det, prova att kommentera ut
     
-    ctx.font = '14px Arial';
+    //canvas text updateras i sekunder
+    ctx.font = '14px Arial'; // font och picel storlek
     ctx.fillStyle = '#000'; // svart
+    ctx.textAlign = 'left'; // är åt vänster sida
+    ctx.fillText(dateObject.getUTCMinutes() + ':' + dateObject.getUTCSeconds(), 10 ,20); //Omvandlar objectet till sekunder enlint UTC format
+
+    //Animeraing av en box
+    // x värde ska updeteras först på boxen, utanför canvas.WIDTH - 100 ska låda byta sida.
+    box.x += box.speed;
+    if (box.x + bpx.speed)
+
 }
 
 //Månste vara sist
