@@ -13,23 +13,44 @@ canvas.height = HEIGHT; // samma elent men oekar till const värde
 
 // flygande kvadrat
 
-const Box = function(x,y) { //ger funktion till x och y kordinater
-    let box = {}; //skapar ett objekt utan egenskaper
-    box.x = x; //positionerar x-led
-    box.y = y; //positionerar y-led
-    box.speed = 4; // ger rit hastighet 4
-    box.width = 10; // storlek på boxen
-    box.height = 10; // höjden på boxen
+const Box = function(x, y) {
+    let box = {};
+    box.x = x;
+    box.y = y;
+    box.speed = 4;
+    box.width = 100;
+    box.height = 100;
     box.color = getRandomColor();
-    box.draw = function() { //öppnar rit funktionen för boxen
+    box.draw = function() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
-    return box;
-}  
+    return box; // vi returnerar box objektet
+}
 
-let Box = Box(0, 200);
+let box = Box(0, 200); // skapa en ny Box och spara den i variabeln box
 
+// spelets huvudloop som kallas på genom requestAnimationFrame
+// https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+let canvasLoop = window.requestAnimationFrame(step);
+// animering
+// https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_animations
+
+let start, timestamp; 
+funktion step(timestamp) {
+    // skapar tids stempel
+    if (!start) start = timestamp;
+    let progress = timestamp - start;  
+    let dateObject = new Date(progress); // omvandlar objektet till att räkna ut tiden.
+    
+    //rensar backsgrunden till semi transparent backgrund
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    // ctx.clearRect(0, 0, WIDTH, HEIGHT); // rensar hela canvas, så att vi kan rita om det, prova att kommentera ut
+    
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#000'; // svart
+}
 
 //Månste vara sist
 let main = document.getElementsByTagName('main')[0]; // hämtar main taggen
